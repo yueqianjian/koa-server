@@ -34,11 +34,10 @@ const storage = multer.diskStorage({
 const upload = multer({storage})
 
 router.get('/getUserList', async ctx => {
-  ctx.status = 201;
   let query = ctx.request.query || ctx.query
   console.log("query",query)
   ctx.body = {
-    name: 123
+    res: `Get is OK`
   }
 })
 
@@ -47,16 +46,17 @@ router.post('/eidtUser', async ctx => {
   let query = ctx.request.body
   console.log("query",query)
   ctx.body = {
-    name: 123
+    res: `Post is OK`
   }
 })
 
 
 router.post('/profile', upload.single('file'), async ctx => {
   let body = ctx.req.body
-  console.log("body",body)
+  const { file } = body
+  let res = file? `UploadFile is OK` :"File is Null"
   ctx.body = {
-    name: 123
+    res
   }
 })
 
